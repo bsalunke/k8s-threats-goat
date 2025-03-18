@@ -1,5 +1,3 @@
-### **README for "Command Execution Using kubectl"**
-
 # Command Execution Using `kubectl`
 🛑 *Simulating Unauthorized Access to Other Containers Using `kubectl`*
 
