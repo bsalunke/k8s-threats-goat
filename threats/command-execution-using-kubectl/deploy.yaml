@@ -1,0 +1,63 @@
+---
+# Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: demo-kubectl-sa
+  namespace: default
+
+---
+# Cluster Role granting broad permissions for demonstration
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: demo-kubectl-cr
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec"]
+    verbs: ["get", "list", "create", "delete", "exec"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch"]
+
+---
+# Cluster Role Binding to tie the above role to our service account
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: demo-kubectl-crb
+subjects:
+  - kind: ServiceAccount
+    name: demo-kubectl-sa
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: demo-kubectl-cr
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Deployment using Alpine-based kubectl container
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-kubectl-deployment
+  labels:
+    app: demo-kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-kubectl
+  template:
+    metadata:
+      labels:
+        app: demo-kubectl
+    spec:
+      serviceAccountName: demo-kubectl-sa
+      containers:
+        - name: demo-kubectl-container
+          image: bsalunke/k8s-threats-goat_command-execution-using-kubectl:latest 
+          imagePullPolicy: Always
+          command: ["tail"]
+          args: ["-f", "/dev/null"]
+
