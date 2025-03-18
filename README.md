@@ -19,7 +19,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-org/k8s-threats-goat.git
 cd k8s-threats-goat
-
+```
 
 ### USAGE
 
@@ -28,24 +28,24 @@ cd k8s-threats-goat
 ```bash
 make build-all
 make push-all DOCKER_REGISTRY=my-dockerhub-username TAG=latest
-
+```
 
 ####  Deploy All Threat Scenarios
 ```bash
 make deploy-all
-
+```
 
 #### Clean Up All Threat Scenarios
 ```bash
 make clean-all
-
+```
 
 ####  Deploy a Specific Threat
 Each threat is located in threats/<threat-name>/. Navigate to a specific threat directory and use its Makefile:
 ```bash
 cd threats/command-execution-using-kubectl
 make all  # Build, push, and deploy the specific threat
-
+```
 
 ## Threat Scenarios
 
