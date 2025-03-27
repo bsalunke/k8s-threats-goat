@@ -1,5 +1,6 @@
 # List of threat modules
-THREATS := command-execution-using-kubectl
+THREATS := $(shell find threats -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+
 
 # Default registry
 DOCKER_REGISTRY ?= your-dockerhub-username

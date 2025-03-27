@@ -9,7 +9,7 @@ TAG ?= latest
 DEPLOYMENT_FILE ?= deploy.yaml
 
 # Derived full image name
-FULL_IMAGE_NAME := localhost/$(DOCKER_REGISTRY)/$(IMAGE_PREFIX)_$(IMAGE_NAME):$(TAG)
+FULL_IMAGE_NAME := $(DOCKER_REGISTRY)/$(IMAGE_PREFIX)_$(IMAGE_NAME):$(TAG)
 
 # Build the Docker image
 build:
@@ -17,8 +17,8 @@ build:
 
 # Push the image to a registry
 push:
-	podman tag $(FULL_IMAGE_NAME) $(DOCKER_REGISTRY)/$(IMAGE_PREFIX)_$(IMAGE_NAME):$(TAG)
-	podman push $(DOCKER_REGISTRY)/$(IMAGE_PREFIX)_$(IMAGE_NAME):$(TAG)
+	#podman tag $(FULL_IMAGE_NAME) $(DOCKER_REGISTRY)/$(IMAGE_PREFIX)_$(IMAGE_NAME):$(TAG)
+	podman push $(FULL_IMAGE_NAME)
 
 # Deploy the threat scenario to Kubernetes
 deploy:
