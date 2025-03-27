@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compiler-executed-in-container
+  namespace: compiler-threat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: compiler-threat
+  template:
+    metadata:
+      labels:
+        app: compiler-threat
+    spec:
+      containers:
+        - name: gcc-compiler
+          image: bsalunke/k8s-threats-goat_compiler-executed-in-container_gcc:latest 
+          command: ["/bin/sh"]
+          args: ["-c", "tail -f /dev/null"]  # Keeps container running
+
+        - name: golang-compiler
+          image: bsalunke/k8s-threats-goat_compiler-executed-in-container_go:latest 
+          command: ["/bin/sh"]
+          args: ["-c", "tail -f /dev/null"]  # Keeps container running
+
+        - name: java-compiler
+          image: bsalunke/k8s-threats-goat_compiler-executed-in-container_java 
+          command: ["/bin/sh"]
+          args: ["-c", "tail -f /dev/null"]  # Keeps container running
+

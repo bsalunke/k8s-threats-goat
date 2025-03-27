@@ -1,0 +1,7 @@
+FROM debian 
+RUN apt-get update 
+RUN apt-get install gcc make -y  
+COPY  ./test.c /
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
+CMD ["/bin/sh", "-c", "./run.sh"]
