@@ -1,5 +1,5 @@
-# Start with Alpine for a lightweight image
-FROM debian 
+# Start with Ubuntu for a lightweight image
+FROM ubuntu:22.04 
 
 RUN id
 
