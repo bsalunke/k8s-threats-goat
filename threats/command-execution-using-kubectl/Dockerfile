@@ -1,4 +1,4 @@
-# Start with Ubuntu for a lightweight image
+# Start with Ubuntu LTS for stability and package availability
 FROM ubuntu:22.04 
 
 RUN id
